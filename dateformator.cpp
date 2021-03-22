@@ -47,7 +47,7 @@ std::string DateFormator::parse(std::string date) {
             auto m = std::to_string(months.at(monthStr));
             auto y = std::to_string(year);
             y = std::string(4 - y.length(), '0') + y;
-            return y +  m + "-" + "01-" + std::string(2 - m.length(), '0');
+            return y + "-" + m  + std::string(2 - m.length(), '0') + "-" + "01";
         }
     }
 
