@@ -55,6 +55,8 @@ private slots:
 
     void on_pushButton_14_pressed();
 
+    void on_pushButton_6_pressed();
+
 private:
     Ui::MainWindow *ui;
 
@@ -82,6 +84,7 @@ private:
     QStringListModel * dateModel;
     vector<std::string> stringList1 = vector<std::string>(0);
     vector<std::string> stringList2 = vector<std::string>(0);
+    vector<std::string> Citrus = vector<std::string>(0);
     vector<std::string> dates = vector<std::string>(0);
     vector<char> alphabet = vector<char>(0);
     DateFormator formator;

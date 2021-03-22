@@ -22,6 +22,10 @@ MainWindow::MainWindow(QWidget *parent)
     stringList1.push_back("C");
     stringList1.push_back("D");
 
+    Citrus.push_back("Orange");
+    Citrus.push_back("Lemon");
+    Citrus.push_back("Lime");
+
 
     ui->listView->setModel(model1);
     ui->listView_2->setModel(model2);
@@ -110,8 +114,20 @@ void MainWindow::UpdateListViews(){
     QStringList qStringList2;
     for(int i = 0; i< stringList1.size(); i++){
         auto s = stringList1[i];
-        if(!(ShoulRemoveA && (s[0]=='A' or s[0]=='a') )){
-                qStringList2 << QString::fromStdString(s);
+        bool flag = true;
+        if((ShoulRemoveA && (s[0]=='A' or s[0]=='a') )){
+                flag = false;
+        }
+        if(ShouldRemoveCitrus){
+            for(int j = 0; j<Citrus.size(); j++){
+                if(s == Citrus[j]){
+                    flag = false;
+                    break;
+                }
+            }
+        }
+        if(flag){
+            qStringList2 << QString::fromStdString(s);
         }
         qStringList1 << QString::fromStdString(s);
     }
@@ -308,7 +324,7 @@ void MainWindow::on_pushButton_14_pressed()
 {
     QString fileName = QFileDialog::getOpenFileName(this,
             tr("Load books"), "",
-            tr("Address Book (*.txt);;All Files (*)"));
+            tr("Books (*.txt);;All Files (*)"));
 
     if (fileName.isEmpty())
             return;
@@ -332,5 +348,37 @@ void MainWindow::on_pushButton_14_pressed()
                 ui->tableWidget->setItem(rowCounter, counter, new QTableWidgetItem(line));
                 counter++;
             } while (!line.isNull());
+         }
+}
+
+void MainWindow::on_pushButton_6_pressed()
+{
+    QString fileName = QFileDialog::getOpenFileName(this,
+            tr("Load fruits"), "",
+            tr("Fruits (*.txt);;All Files (*)"));
+
+    if (fileName.isEmpty())
+            return;
+        else {
+            QFile file(fileName);
+            if (!file.open(QIODevice::ReadOnly)) {
+                QMessageBox::information(this, tr("Unable to open file"),
+                    file.errorString());
+                return;
+            }
+            QTextStream instream(&file);
+            QString line;
+            int counter = 0;
+            int rowCounter = 0;
+            do {
+                if(counter > 3){
+                    counter = 0;
+                    rowCounter ++;
+                }
+                line = instream.readLine();
+                stringList1.push_back(line.toStdString());
+                counter++;
+            } while (!line.isNull());
+            UpdateListViews();
          }
 }
