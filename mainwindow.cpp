@@ -382,3 +382,18 @@ void MainWindow::on_pushButton_6_pressed()
             UpdateListViews();
          }
 }
+
+void MainWindow::on_pushButton_7_pressed()
+{
+    AddFruit();
+}
+
+void MainWindow::on_pushButton_8_pressed()
+{
+    AddDate();
+}
+
+void MainWindow::on_pushButton_9_pressed()
+{
+    AddBitSet();
+}
