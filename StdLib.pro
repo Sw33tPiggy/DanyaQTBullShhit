@@ -16,11 +16,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    dateformator.cpp \
+    itor_vector.cpp \
+    list.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
-    mainwindow.h
+    Itor.h \
+    dateformator.h \
+    itor_vector.h \
+    list.h \
+    mainwindow.h \
+    vector.h
 
 FORMS += \
     mainwindow.ui
